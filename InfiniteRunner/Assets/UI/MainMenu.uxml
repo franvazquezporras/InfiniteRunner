@@ -2,6 +2,10 @@
     <Style src="GeneralStyle.uss" />
     <ui:VisualElement name="MainContainer" class="main-container" style="height: 100%;">
         <ui:VisualElement name="TitleImage" class="title-image" style="background-image: url(&apos;/Assets/Textures/EndlessRunnerTittle.png&apos;);" />
-        <ui:VisualElement name="ButtonsMenu" />
+        <ui:VisualElement name="ButtonsMenu" class="buttons-container">
+            <ui:Button text="Play" display-tooltip-when-elided="true" name="BPlay" class="menu-button" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" name="BSettings" class="menu-button" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="BExit" class="menu-button" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
