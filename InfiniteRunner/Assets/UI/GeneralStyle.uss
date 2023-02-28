@@ -14,24 +14,3 @@ VisualElement {
     height: 10%;
     margin-top: 10%;
 }
-
-.menu-button {
-    font-size: 35px;
-    background-color: rgba(0, 0, 0, 0);
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    -unity-font-definition: url('/Assets/Fonts/Weirdo SDF.asset');
-}
-
-.buttons-container {
-    flex-grow: 1;
-    justify-content: center;
-    padding-bottom: 20%;
-}
-
-.menu-button:hover {
-    color: rgba(255, 255, 255, 255);
-    font-size: 40px;
-}
