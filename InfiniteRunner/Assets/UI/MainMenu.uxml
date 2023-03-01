@@ -1,7 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="GeneralStyle.uss" />
-    <ui:VisualElement name="MainContainer" class="main-container" style="height: 100%;">
-        <ui:VisualElement name="TitleImage" class="title-image" style="background-image: url(&apos;/Assets/Textures/EndlessRunnerTittle.png&apos;);" />
-        <ui:VisualElement name="ButtonsMenu" />
+    <Style src="project://database/Assets/UI/GeneralStyle.uss?fileID=7433441132597879392&amp;guid=bfaabd65db00f5446ae8da4f3986fb68&amp;type=3#GeneralStyle" />
+    <ui:VisualElement name="Menu" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="MainContainer" class="main-container" style="height: 100%;">
+            <ui:VisualElement name="TitleImage" class="title-image" style="background-image: url(&apos;project://database/Assets/Textures/UI/EndlessRunnerTittle.png?fileID=21300000&amp;guid=7d33a7a1ecffc4c4b9f569fbd2051682&amp;type=3#EndlessRunnerTittle&apos;);" />
+            <ui:VisualElement name="ButtonsMenu" class="menu-container">
+                <ui:Button text="Play" display-tooltip-when-elided="true" name="BPlay" class="menu-button" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="BSettings" class="menu-button" />
+                <ui:Button text="Exit" display-tooltip-when-elided="true" name="BExit" class="menu-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightMenu" style="flex-grow: 1; align-items: flex-end; justify-content: flex-start; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+            <ui:Button display-tooltip-when-elided="true" class="menu-button" style="background-image: url(&apos;project://database/Assets/Textures/UI/GUI.png?fileID=21300086&amp;guid=1eaee135ce037439d925cee5e41ce026&amp;type=3#GUI_48&apos;); width: 30px; height: 30px;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
