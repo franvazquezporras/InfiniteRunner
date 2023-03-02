@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GeneralStyle.uss?fileID=7433441132597879392&amp;guid=bfaabd65db00f5446ae8da4f3986fb68&amp;type=3#GeneralStyle" />
+    <ui:VisualElement name="Wrapper">
+        <ui:Button text="Setting A" display-tooltip-when-elided="true" name="BSettingA" class="menu-button" />
+        <ui:Button text="Setting B" display-tooltip-when-elided="true" name="BSettingB" class="menu-button" />
+        <ui:Button text="Setting C" display-tooltip-when-elided="true" name="BSettingC" class="menu-button" />
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="BBack" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

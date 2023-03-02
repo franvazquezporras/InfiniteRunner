@@ -10,7 +10,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightMenu" style="flex-grow: 1; align-items: flex-end; justify-content: flex-start; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
-            <ui:Button display-tooltip-when-elided="true" class="menu-button" style="background-image: url(&apos;project://database/Assets/Textures/UI/GUI.png?fileID=21300086&amp;guid=1eaee135ce037439d925cee5e41ce026&amp;type=3#GUI_48&apos;); width: 30px; height: 30px;" />
+            <ui:Button display-tooltip-when-elided="true" name="BMute" class="menu-button" style="background-image: url(&apos;project://database/Assets/Textures/UI/GUI.png?fileID=21300086&amp;guid=1eaee135ce037439d925cee5e41ce026&amp;type=3#GUI_48&apos;); width: 30px; height: 30px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
