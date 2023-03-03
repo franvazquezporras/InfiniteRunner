@@ -34,8 +34,28 @@ VisualElement {
 }
 
 .menu-button:hover {
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     font-size: 40px;
     rotate: -10deg;
     transition-duration: 0.3s;
+}
+
+.setting-option {
+    font-size: 20px;
+    -unity-text-align: middle-center;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    -unity-font-definition: url('project://database/Assets/Fonts/Weirdo%20SDF.asset?fileID=11400000&guid=bd642c538bc3c404e9f36134053b7e87&type=2#Weirdo SDF');
+    transition-duration: 0.2s;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

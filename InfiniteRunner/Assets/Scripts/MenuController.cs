@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
 {
     
     private UIDocument mainMenuDocument;
+
     private VisualElement buttonsPanel;
     private Button bPlay;
     private Button bSettings;
@@ -20,8 +21,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Sprite unMuteSprite;
     private bool mute;
 
-    [SerializeField]
-    private VisualTreeAsset settingsMenu;
+
+    [SerializeField] private VisualTreeAsset settingsMenu;
     private VisualElement settingsButtons;
 
     private void Awake()
