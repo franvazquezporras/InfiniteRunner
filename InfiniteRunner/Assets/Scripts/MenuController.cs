@@ -14,7 +14,6 @@ public class MenuController : MonoBehaviour
     private Button bSettings;
     private Button bExit;
     private Button bMute;
-    private Button bBack;
 
     [Header("Mute Button")]
     [SerializeField] private Sprite muteSprite;
@@ -24,6 +23,14 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private VisualTreeAsset settingsMenu;
     private VisualElement settingsButtons;
+    private DropdownField dropDownResolution;
+    private DropdownField dropDownQuality;
+    private Toggle toggleFullScreen;
+    private Slider sliderBrightness;
+    private Slider sliderAudio;
+    private Button bBack;
+    
+
 
     private void Awake()
     {
@@ -35,6 +42,11 @@ public class MenuController : MonoBehaviour
         bMute = mainMenuDocument.rootVisualElement.Q<Button>("BMute");
         //settings menu
         settingsButtons = settingsMenu.CloneTree();
+        dropDownResolution = settingsButtons.Q<DropdownField>("DropDownResolution");
+        dropDownQuality = settingsButtons.Q<DropdownField>("DropDownQuality");
+        toggleFullScreen = settingsButtons.Q<Toggle>("ToggleFullScreen");
+        sliderBrightness = settingsButtons.Q<Slider>("SliderBrightness");
+        sliderAudio = settingsButtons.Q<Slider>("SliderAudio");
         bBack = settingsButtons.Q<Button>("BBack");
         SetCallBacks();
     } 
