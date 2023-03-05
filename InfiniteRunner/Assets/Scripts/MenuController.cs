@@ -29,8 +29,17 @@ public class MenuController : MonoBehaviour
     private Slider sliderBrightness;
     private Slider sliderAudio;
     private Button bBack;
-    
 
+
+    private List<string> resolutions = new List<string>()
+    {
+        "3840x2160",
+        "2560x1440",
+        "1920x1080",
+        "1600x900",
+        "1366x768",
+        "1280x720"
+    };
 
     private void Awake()
     {
@@ -43,13 +52,14 @@ public class MenuController : MonoBehaviour
         //settings menu
         settingsButtons = settingsMenu.CloneTree();
         dropDownResolution = settingsButtons.Q<DropdownField>("DropDownResolution");
+        dropDownResolution.choices = resolutions;
         dropDownQuality = settingsButtons.Q<DropdownField>("DropDownQuality");
         toggleFullScreen = settingsButtons.Q<Toggle>("ToggleFullScreen");
         sliderBrightness = settingsButtons.Q<Slider>("SliderBrightness");
         sliderAudio = settingsButtons.Q<Slider>("SliderAudio");
         bBack = settingsButtons.Q<Button>("BBack");
         SetCallBacks();
-    } 
+    }
 
     private void SetCallBacks()
     {
@@ -57,10 +67,23 @@ public class MenuController : MonoBehaviour
         bSettings.clicked += SettingsButtonOnClicked;
         bExit.clicked += ExitButtonOnClicked;
         bMute.clicked += MuteButtonOnClicked;
+
+        dropDownResolution.RegisterValueChangedCallback(value => SelectResolution(dropDownResolution.value));
+        dropDownResolution.index = 0;
+        //dropDownQuality.RegisterValueChangedCallback;
+        toggleFullScreen.RegisterCallback<MouseUpEvent>(ev => { SetFullScreen(toggleFullScreen.value); }, TrickleDown.TrickleDown);
+
         bBack.clicked += BackButtonOnClicked;
     }
 
+    private void SetFullScreen(bool check)
+    {
+        Screen.fullScreen = check;
+    }
+    private void SelectResolution(string newResolution)
+    {
 
+    }
     private void PlayButtonOnClicked()
     {
         SceneManager.LoadScene("Game");
