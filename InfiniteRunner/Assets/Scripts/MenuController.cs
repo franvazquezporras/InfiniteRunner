@@ -29,20 +29,18 @@ public class MenuController : MonoBehaviour
     private Slider sliderBrightness;
     private Slider sliderAudio;
     private Button bBack;
+    Resolution[] resolutions;
 
-
-    private List<string> resolutions = new List<string>()
+    private List<string> qualityList = new List<string>()
     {
-        "3840x2160",
-        "2560x1440",
-        "1920x1080",
-        "1600x900",
-        "1366x768",
-        "1280x720"
+        "Low",
+        "Medium",
+        "High"
     };
 
     private void Awake()
     {
+        
         mainMenuDocument = GetComponent<UIDocument>();
         buttonsPanel = mainMenuDocument.rootVisualElement.Q<VisualElement>("ButtonsMenu");
         bPlay = mainMenuDocument.rootVisualElement.Q<Button>("BPlay");
@@ -52,8 +50,10 @@ public class MenuController : MonoBehaviour
         //settings menu
         settingsButtons = settingsMenu.CloneTree();
         dropDownResolution = settingsButtons.Q<DropdownField>("DropDownResolution");
-        dropDownResolution.choices = resolutions;
+        TakeAllResolutions();        
         dropDownQuality = settingsButtons.Q<DropdownField>("DropDownQuality");
+        dropDownQuality.choices = qualityList;
+        dropDownQuality.index = 0;
         toggleFullScreen = settingsButtons.Q<Toggle>("ToggleFullScreen");
         sliderBrightness = settingsButtons.Q<Slider>("SliderBrightness");
         sliderAudio = settingsButtons.Q<Slider>("SliderAudio");
@@ -68,9 +68,9 @@ public class MenuController : MonoBehaviour
         bExit.clicked += ExitButtonOnClicked;
         bMute.clicked += MuteButtonOnClicked;
 
-        dropDownResolution.RegisterValueChangedCallback(value => SelectResolution(dropDownResolution.value));
+        dropDownResolution.RegisterValueChangedCallback(value => SetResolution(dropDownResolution.index));
         dropDownResolution.index = 0;
-        //dropDownQuality.RegisterValueChangedCallback;
+        dropDownQuality.RegisterValueChangedCallback(value => SelectQuality(dropDownQuality.value));
         toggleFullScreen.RegisterCallback<MouseUpEvent>(ev => { SetFullScreen(toggleFullScreen.value); }, TrickleDown.TrickleDown);
 
         bBack.clicked += BackButtonOnClicked;
@@ -80,9 +80,51 @@ public class MenuController : MonoBehaviour
     {
         Screen.fullScreen = check;
     }
-    private void SelectResolution(string newResolution)
-    {
 
+    /*********************************************************************************************************************************/
+    /*Funcion: TakeAllResolutions                                                                                                    */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene las resoluciones posibles de la pantalla para generarlas en el dropbox de resoluciones sin que se repitan */
+    /*********************************************************************************************************************************/
+    private void TakeAllResolutions()
+    {
+        resolutions = Screen.resolutions;               
+        List<string> options = new List<string>();
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            if (i >= 2 && (resolutions[i].width != resolutions[i - 1].width || resolutions[i].height != resolutions[i - 1].height))
+                options.Add(option);
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                currentResolutionIndex = i;
+        }
+        dropDownResolution.choices = options;
+        dropDownResolution.index = currentResolutionIndex;
+        
+    }
+    /*********************************************************************************************************************************/
+    /*Funcion: SetResolution                                                                                                         */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: resolutionIndex (resolucion seleccionada del dropbox)                                                   */
+    /*Descripción: Modifica la resolucion del juego                                                                                  */
+    /*********************************************************************************************************************************/
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);       
+    }
+    
+    private void SelectQuality(string newQuality)
+    {
+        int quality = 0;
+        if (newQuality == "Low")
+            quality = 0;
+        else if (newQuality == "Medium")
+            quality = 1;
+        else if (newQuality == "High")
+            quality = 2;
+        QualitySettings.SetQualityLevel(quality);
     }
     private void PlayButtonOnClicked()
     {
