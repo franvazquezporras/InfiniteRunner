@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-
+using UnityEngine.Audio;
 public class MenuController : MonoBehaviour
 {
     
@@ -31,6 +31,9 @@ public class MenuController : MonoBehaviour
     private Button bBack;
     Resolution[] resolutions;
 
+    [SerializeField] private AudioMixer audioMixer;
+    
+
     private List<string> qualityList = new List<string>()
     {
         "Low",
@@ -56,7 +59,7 @@ public class MenuController : MonoBehaviour
         dropDownQuality.index = 0;
         toggleFullScreen = settingsButtons.Q<Toggle>("ToggleFullScreen");
         sliderBrightness = settingsButtons.Q<Slider>("SliderBrightness");
-        sliderAudio = settingsButtons.Q<Slider>("SliderAudio");
+        sliderAudio = settingsButtons.Q<Slider>("SliderVolume");
         bBack = settingsButtons.Q<Button>("BBack");
         SetCallBacks();
     }
@@ -72,7 +75,9 @@ public class MenuController : MonoBehaviour
         dropDownResolution.index = 0;
         dropDownQuality.RegisterValueChangedCallback(value => SelectQuality(dropDownQuality.value));
         toggleFullScreen.RegisterCallback<MouseUpEvent>(ev => { SetFullScreen(toggleFullScreen.value); }, TrickleDown.TrickleDown);
-
+        sliderBrightness.RegisterValueChangedCallback(SetBrightness);
+        //sliderAudio.RegisterValueChangedCallback(SetMasterVolume);
+        sliderAudio.RegisterValueChangedCallback(ev => SetMasterVolume(sliderAudio.value));
         bBack.clicked += BackButtonOnClicked;
     }
 
@@ -125,6 +130,19 @@ public class MenuController : MonoBehaviour
         else if (newQuality == "High")
             quality = 2;
         QualitySettings.SetQualityLevel(quality);
+    }
+
+    private void SetMasterVolume(float ev)
+    {
+        if(ev==0)
+            audioMixer.SetFloat("masterVolume", -80);
+        else
+            audioMixer.SetFloat("masterVolume", Mathf.Log10(ev) * 20);
+    }
+    private void SetBrightness(ChangeEvent<float> ev)
+    {        
+        Screen.brightness = ev.newValue;
+        Debug.Log(Screen.brightness+"      "+ev.newValue);
     }
     private void PlayButtonOnClicked()
     {
