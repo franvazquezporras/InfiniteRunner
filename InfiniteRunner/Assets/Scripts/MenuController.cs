@@ -13,12 +13,15 @@ public class MenuController : MonoBehaviour
     private Button bPlay;
     private Button bSettings;
     private Button bExit;
-    private Button bMute;
+    private Button bMuteMusic;
+    private Button bMuteSound;
 
     [Header("Mute Button")]
     [SerializeField] private Sprite muteSprite;
-    [SerializeField] private Sprite unMuteSprite;
-    private bool mute;
+    [SerializeField] private Sprite unMuteMusicSprite;
+    [SerializeField] private Sprite unMuteSoundSprite;
+    private bool muteMusic;
+    private bool muteSound;
 
 
     [SerializeField] private VisualTreeAsset settingsMenu;
@@ -26,12 +29,14 @@ public class MenuController : MonoBehaviour
     private DropdownField dropDownResolution;
     private DropdownField dropDownQuality;
     private Toggle toggleFullScreen;
-    private Slider sliderBrightness;
-    private Slider sliderAudio;
+    private Slider sliderSound;
+    private Slider sliderMusic;
     private Button bBack;
     Resolution[] resolutions;
 
     [SerializeField] private AudioMixer audioMixer;
+
+    
     
 
     private List<string> qualityList = new List<string>()
@@ -49,7 +54,8 @@ public class MenuController : MonoBehaviour
         bPlay = mainMenuDocument.rootVisualElement.Q<Button>("BPlay");
         bSettings = mainMenuDocument.rootVisualElement.Q<Button>("BSettings");
         bExit = mainMenuDocument.rootVisualElement.Q<Button>("BExit");
-        bMute = mainMenuDocument.rootVisualElement.Q<Button>("BMute");
+        bMuteMusic = mainMenuDocument.rootVisualElement.Q<Button>("BMuteMusic");
+        bMuteSound = mainMenuDocument.rootVisualElement.Q<Button>("BMuteSound");
         //settings menu
         settingsButtons = settingsMenu.CloneTree();
         dropDownResolution = settingsButtons.Q<DropdownField>("DropDownResolution");
@@ -58,8 +64,8 @@ public class MenuController : MonoBehaviour
         dropDownQuality.choices = qualityList;
         dropDownQuality.index = 0;
         toggleFullScreen = settingsButtons.Q<Toggle>("ToggleFullScreen");
-        sliderBrightness = settingsButtons.Q<Slider>("SliderBrightness");
-        sliderAudio = settingsButtons.Q<Slider>("SliderVolume");
+        sliderSound = settingsButtons.Q<Slider>("SliderSound");
+        sliderMusic = settingsButtons.Q<Slider>("SliderMusic");
         bBack = settingsButtons.Q<Button>("BBack");
         SetCallBacks();
     }
@@ -69,15 +75,16 @@ public class MenuController : MonoBehaviour
         bPlay.clicked += PlayButtonOnClicked;
         bSettings.clicked += SettingsButtonOnClicked;
         bExit.clicked += ExitButtonOnClicked;
-        bMute.clicked += MuteButtonOnClicked;
+        bMuteMusic.RegisterCallback<ClickEvent>(ev => MuteMusicButtonOnClicked(false));
+        bMuteSound.RegisterCallback<ClickEvent>(ev => MuteSoundButtonOnClicked(false));
 
         dropDownResolution.RegisterValueChangedCallback(value => SetResolution(dropDownResolution.index));
         dropDownResolution.index = 0;
         dropDownQuality.RegisterValueChangedCallback(value => SelectQuality(dropDownQuality.value));
         toggleFullScreen.RegisterCallback<MouseUpEvent>(ev => { SetFullScreen(toggleFullScreen.value); }, TrickleDown.TrickleDown);
-        sliderBrightness.RegisterValueChangedCallback(SetBrightness);
-        //sliderAudio.RegisterValueChangedCallback(SetMasterVolume);
-        sliderAudio.RegisterValueChangedCallback(ev => SetMasterVolume(sliderAudio.value));
+        
+        sliderSound.RegisterValueChangedCallback(ev => SetSoundVolume(sliderSound.value));
+        sliderMusic.RegisterValueChangedCallback(ev => SetMusicVolume(sliderMusic.value));
         bBack.clicked += BackButtonOnClicked;
     }
 
@@ -132,18 +139,8 @@ public class MenuController : MonoBehaviour
         QualitySettings.SetQualityLevel(quality);
     }
 
-    private void SetMasterVolume(float ev)
-    {
-        if(ev==0)
-            audioMixer.SetFloat("masterVolume", -80);
-        else
-            audioMixer.SetFloat("masterVolume", Mathf.Log10(ev) * 20);
-    }
-    private void SetBrightness(ChangeEvent<float> ev)
-    {        
-        Screen.brightness = ev.newValue;
-        Debug.Log(Screen.brightness+"      "+ev.newValue);
-    }
+   
+  
     private void PlayButtonOnClicked()
     {
         SceneManager.LoadScene("Game");
@@ -160,16 +157,48 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
-    private void MuteButtonOnClicked()
+    private void SetMusicVolume(float ev)
     {
-        mute = !mute;
-        StyleBackground background = bMute.style.backgroundImage;
-        background.value = Background.FromSprite(mute ? muteSprite : unMuteSprite);
-        bMute.style.backgroundImage = background;
-
-        AudioListener.volume = mute ? 0 : 1;
+        audioMixer.SetFloat("musicVolume", Mathf.Log10(ev) * 20);
+        if (ev <= -0.001)
+            muteMusic = true;
+        else
+            muteMusic = false;
+        PlayerPrefs.SetFloat("musicVolume", Mathf.Log10(ev) * 20);
+        MuteMusicButtonOnClicked(true);
+        
     }
+    private void MuteMusicButtonOnClicked(bool slide)
+    {
+        if(!slide)
+            muteMusic = !muteMusic;
+        StyleBackground background = bMuteMusic.style.backgroundImage;
+        background.value = Background.FromSprite(muteMusic ? muteSprite : unMuteMusicSprite);
+        bMuteMusic.style.backgroundImage = background;
+        audioMixer.SetFloat("musicVolume", muteMusic ? -80f : PlayerPrefs.GetFloat("musicVolume"));
+        
+    }
+    private void SetSoundVolume(float ev)
+    {
 
+        audioMixer.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);
+        if (ev <= -0.001)
+            muteSound = true;
+        else
+            muteSound = false;
+        PlayerPrefs.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);
+        MuteSoundButtonOnClicked(true);
+    }
+    private void MuteSoundButtonOnClicked(bool slide)
+    {
+        if (!slide)        
+            muteSound = !muteSound;            
+        StyleBackground background = bMuteSound.style.backgroundImage;
+        background.value = Background.FromSprite(muteSound ? muteSprite : unMuteSoundSprite);
+        bMuteSound.style.backgroundImage = background;
+        audioMixer.SetFloat("soundsVolume", muteSound ? -80f : PlayerPrefs.GetFloat("soundsVolume"));
+        
+    }
     private void BackButtonOnClicked()
     {
         buttonsPanel.Clear();

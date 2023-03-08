@@ -5,8 +5,8 @@
         <ui:DropdownField label="Resolucion" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="DropDownResolution" class="setting-option" />
         <ui:DropdownField label="Calidad" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="DropDownQuality" class="setting-option" />
         <ui:Toggle label="Pantalla Completa" name="ToggleFullScreen" class="setting-option" />
-        <ui:Slider picking-mode="Ignore" label="Brillo" value="42" high-value="1" name="SliderBrightness" show-input-field="false" class="setting-option" />
-        <ui:Slider picking-mode="Ignore" label="Audio" value="42" high-value="1" name="SliderVolume" class="setting-option" />
+        <ui:Slider picking-mode="Ignore" label="Sound" value="42" high-value="1" name="SliderSound" show-input-field="false" low-value="-0.001" class="setting-option" />
+        <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="1" name="SliderMusic" low-value="-0.001" class="setting-option" />
         <ui:Button text="Back" display-tooltip-when-elided="true" name="BBack" class="menu-button" />
     </ui:VisualElement>
 </ui:UXML>
