@@ -22,7 +22,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Sprite unMuteSoundSprite;
     private bool muteMusic;
     private bool muteSound;
-
+    [SerializeField] private AudioMixer audioMixer;
 
     [SerializeField] private VisualTreeAsset settingsMenu;
     private VisualElement settingsButtons;
@@ -34,17 +34,9 @@ public class MenuController : MonoBehaviour
     private Button bBack;
     Resolution[] resolutions;
 
-    [SerializeField] private AudioMixer audioMixer;
-
-    
     
 
-    private List<string> qualityList = new List<string>()
-    {
-        "Low",
-        "Medium",
-        "High"
-    };
+    private List<string> qualityList = new List<string>(){"Low","Medium","High"};
 
     private void Awake()
     {
@@ -112,8 +104,7 @@ public class MenuController : MonoBehaviour
                 currentResolutionIndex = i;
         }
         dropDownResolution.choices = options;
-        dropDownResolution.index = currentResolutionIndex;
-        
+        dropDownResolution.index = currentResolutionIndex;        
     }
     /*********************************************************************************************************************************/
     /*Funcion: SetResolution                                                                                                         */
@@ -137,9 +128,7 @@ public class MenuController : MonoBehaviour
         else if (newQuality == "High")
             quality = 2;
         QualitySettings.SetQualityLevel(quality);
-    }
-
-   
+    }   
   
     private void PlayButtonOnClicked()
     {
@@ -161,34 +150,45 @@ public class MenuController : MonoBehaviour
     {
         audioMixer.SetFloat("musicVolume", Mathf.Log10(ev) * 20);
         if (ev <= -0.001)
+        {
             muteMusic = true;
+            MuteMusicButtonOnClicked(true);
+        }
         else
+        {
             muteMusic = false;
-        PlayerPrefs.SetFloat("musicVolume", Mathf.Log10(ev) * 20);
-        MuteMusicButtonOnClicked(true);
-        
+            MuteMusicButtonOnClicked(true);
+        }
+        PlayerPrefs.SetFloat("musicVolume", sliderMusic.value);
     }
+
     private void MuteMusicButtonOnClicked(bool slide)
     {
-        if(!slide)
-            muteMusic = !muteMusic;
+        
+        if (!slide)                  
+            muteMusic = !muteMusic;         
         StyleBackground background = bMuteMusic.style.backgroundImage;
         background.value = Background.FromSprite(muteMusic ? muteSprite : unMuteMusicSprite);
-        bMuteMusic.style.backgroundImage = background;
-        audioMixer.SetFloat("musicVolume", muteMusic ? -80f : PlayerPrefs.GetFloat("musicVolume"));
-        
+        bMuteMusic.style.backgroundImage = background;        
+        audioMixer.SetFloat("musicVolume", muteMusic ? -80f : Mathf.Log10(PlayerPrefs.GetFloat("musicVolume"))*20);        
     }
+
     private void SetSoundVolume(float ev)
     {
-
         audioMixer.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);
         if (ev <= -0.001)
+        {
             muteSound = true;
+            MuteSoundButtonOnClicked(true);
+        }
         else
+        {
             muteSound = false;
-        PlayerPrefs.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);
-        MuteSoundButtonOnClicked(true);
+            MuteSoundButtonOnClicked(true);
+        }
+        PlayerPrefs.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);        
     }
+
     private void MuteSoundButtonOnClicked(bool slide)
     {
         if (!slide)        
@@ -196,9 +196,9 @@ public class MenuController : MonoBehaviour
         StyleBackground background = bMuteSound.style.backgroundImage;
         background.value = Background.FromSprite(muteSound ? muteSprite : unMuteSoundSprite);
         bMuteSound.style.backgroundImage = background;
-        audioMixer.SetFloat("soundsVolume", muteSound ? -80f : PlayerPrefs.GetFloat("soundsVolume"));
-        
+        audioMixer.SetFloat("soundsVolume", muteSound ? -80f : Mathf.Log10(PlayerPrefs.GetFloat("soundsVolume")) * 20);
     }
+
     private void BackButtonOnClicked()
     {
         buttonsPanel.Clear();

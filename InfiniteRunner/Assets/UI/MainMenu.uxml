@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/GeneralStyle.uss?fileID=7433441132597879392&amp;guid=bfaabd65db00f5446ae8da4f3986fb68&amp;type=3#GeneralStyle" />
-    <ui:VisualElement name="Menu" style="flex-grow: 1; flex-direction: row;">
+    <ui:VisualElement name="Menu" style="flex-grow: 1; flex-direction: row; background-image: url(&apos;project://database/Assets/Textures/SkySunset.png?fileID=2800000&amp;guid=ef54a136ffec95041abc29a64b863973&amp;type=3#SkySunset&apos;);">
         <ui:VisualElement name="MainContainer" class="main-container" style="height: 100%;">
             <ui:VisualElement name="TitleImage" class="title-image" style="background-image: url(&apos;project://database/Assets/Textures/UI/EndlessRunnerTittle.png?fileID=21300000&amp;guid=7d33a7a1ecffc4c4b9f569fbd2051682&amp;type=3#EndlessRunnerTittle&apos;);" />
             <ui:VisualElement name="ButtonsMenu" class="menu-container">
