@@ -4,7 +4,7 @@
         <ui:VisualElement name="MainContainer" class="main-container" style="height: 100%; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; justify-content: flex-start;">
             <ui:VisualElement name="ButtonsMenu" class="menu-container" style="padding-bottom: 0;">
                 <ui:Button text="Continue" display-tooltip-when-elided="true" name="BContinue" class="menu-button" />
-                <ui:Button text="Exit" display-tooltip-when-elided="true" name="BExit" class="menu-button" />
+                <ui:Button text="Exit" display-tooltip-when-elided="true" name="BExitPause" class="menu-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

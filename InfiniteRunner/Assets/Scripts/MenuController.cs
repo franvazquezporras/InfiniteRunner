@@ -41,6 +41,8 @@ public class MenuController : MonoBehaviour
     private void Awake()
     {
         
+        muteMusic = PlayerPrefs.GetInt("muteMusic") == 1;
+        muteSound = PlayerPrefs.GetInt("muteSound") == 1;
         mainMenuDocument = GetComponent<UIDocument>();
         buttonsPanel = mainMenuDocument.rootVisualElement.Q<VisualElement>("ButtonsMenu");
         bPlay = mainMenuDocument.rootVisualElement.Q<Button>("BPlay");
@@ -153,12 +155,15 @@ public class MenuController : MonoBehaviour
         {
             muteMusic = true;
             MuteMusicButtonOnClicked(true);
+            PlayerPrefs.SetInt("muteMusic", 1);
         }
         else
         {
             muteMusic = false;
             MuteMusicButtonOnClicked(true);
+            PlayerPrefs.SetInt("muteMusic", 0);
         }
+        
         PlayerPrefs.SetFloat("musicVolume", sliderMusic.value);
     }
 
@@ -180,11 +185,13 @@ public class MenuController : MonoBehaviour
         {
             muteSound = true;
             MuteSoundButtonOnClicked(true);
+            PlayerPrefs.SetInt("muteSound", 1);
         }
         else
         {
             muteSound = false;
             MuteSoundButtonOnClicked(true);
+            PlayerPrefs.SetInt("muteSound", 0);
         }
         PlayerPrefs.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);        
     }
