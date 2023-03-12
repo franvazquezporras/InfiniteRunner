@@ -168,8 +168,7 @@ public class MenuController : MonoBehaviour
     }
 
     private void MuteMusicButtonOnClicked(bool slide)
-    {
-        
+    {        
         if (!slide)                  
             muteMusic = !muteMusic;         
         StyleBackground background = bMuteMusic.style.backgroundImage;
