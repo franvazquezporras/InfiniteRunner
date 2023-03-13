@@ -55,6 +55,9 @@ public class GameMenuControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
             Pause();
+        //controlar por variable de muerte del jugador
+        if (Input.GetKeyDown(KeyCode.K))
+            GameOver();
     }
     private void SetCallbacks()
     {

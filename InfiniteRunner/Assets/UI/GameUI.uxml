@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="PauseMenu" src="project://database/Assets/UI/PauseMenu.uxml?fileID=9197481963319205126&amp;guid=6f4d16ec86ec3a948acc37a102a00c97&amp;type=3#PauseMenu" />
+    <ui:Template name="GameOverPanel" src="project://database/Assets/UI/GameOverPanel.uxml?fileID=9197481963319205126&amp;guid=a6b702d1431641c458ea933e1823f241&amp;type=3#GameOverPanel" />
     <Style src="project://database/Assets/UI/GeneralStyle.uss?fileID=7433441132597879392&amp;guid=bfaabd65db00f5446ae8da4f3986fb68&amp;type=3#GeneralStyle" />
-    <ui:VisualElement name="Menu" style="flex-grow: 1; flex-direction: row;">
+    <ui:VisualElement name="PlayerUI" style="flex-grow: 1; flex-direction: row; position: absolute;">
         <ui:VisualElement name="RightMenu" class="right-menu" style="justify-content: center;">
             <ui:Label text="Score:" display-tooltip-when-elided="true" name="ScoreText" class="menu-button" />
         </ui:VisualElement>
@@ -9,4 +11,6 @@
             <ui:Button display-tooltip-when-elided="true" name="BMuteMusic" class="menu-button" style="background-image: url(&apos;project://database/Assets/Textures/UI/GUI.png?fileID=21300084&amp;guid=1eaee135ce037439d925cee5e41ce026&amp;type=3#GUI_47&apos;); width: 30px; height: 30px;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:Instance template="PauseMenu" name="PauseMenu" class="full-screen" style="display: none;" />
+    <ui:Instance template="GameOverPanel" name="GameOverPanel" class="full-screen" style="display: none;" />
 </ui:UXML>
