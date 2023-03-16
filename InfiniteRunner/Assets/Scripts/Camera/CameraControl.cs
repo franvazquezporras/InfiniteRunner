@@ -16,7 +16,7 @@ public class CameraControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 targetCamPos = player.position + offset; // Calculate the target camera position
+        Vector3 targetCamPos = new Vector3(player.position.x + offset.x,0,-10); // Calculate the target camera position
         transform.position = Vector3.Lerp(transform.position, targetCamPos, smothing * Time.deltaTime); // Smoothly move the camera towards the target position
 
     }
