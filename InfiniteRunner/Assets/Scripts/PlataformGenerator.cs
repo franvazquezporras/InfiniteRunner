@@ -7,6 +7,10 @@ public class PlataformGenerator : MonoBehaviour
     [SerializeField] private GameObject platform;
     [SerializeField] private Transform generationPoint;
     [SerializeField] private float distance;
+
+    private float minDistance = 1;
+    private float maxDistance = 5;
+
     private float platformWidth;
     void Start()
     {
@@ -18,8 +22,10 @@ public class PlataformGenerator : MonoBehaviour
     {
         if (transform.position.x < generationPoint.position.x)
         {
+            distance = Random.Range(minDistance, maxDistance);
             transform.position = new Vector3(transform.position.x + platformWidth + distance, transform.position.y, transform.position.z);
             Instantiate(platform, transform.position, transform.rotation);
+
         }
     }
 }
