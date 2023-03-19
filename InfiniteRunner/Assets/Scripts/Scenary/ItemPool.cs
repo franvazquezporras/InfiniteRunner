@@ -4,7 +4,7 @@ using UnityEngine;
  
 public class ItemPool : MonoBehaviour
 {
-    [SerializeField] private GameObject poolItem;
+    [SerializeField] public GameObject poolItem;
     [SerializeField] private int poolAmount;
 
     List<GameObject> poolObjects;
