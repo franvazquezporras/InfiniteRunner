@@ -6,4 +6,5 @@ public class Layers : MonoBehaviour
 {
     public const int PLAYER = 3;
     public const int GROUND = 6;
+    public const int DEATHZONE = 7;
 }

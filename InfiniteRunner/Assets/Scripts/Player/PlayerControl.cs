@@ -23,6 +23,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform groundcheck;
     [SerializeField] private float groundCheckRadius;
 
+    [Header("References")]
+    [SerializeField] GameManager gm;
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -70,5 +73,12 @@ public class PlayerControl : MonoBehaviour
             jumpTimeCounter = jumpTime;
         }
         anim.SetBool("Grounded", isGrounded);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == Layers.DEATHZONE)
+            gm.RestartGame();
+           
     }
 }

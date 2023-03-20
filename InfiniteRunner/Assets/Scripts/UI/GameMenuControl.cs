@@ -12,15 +12,16 @@ public class GameMenuControl : MonoBehaviour
     private Button soundMute;
     private Button musicMute;
     //PauseUI
-  //  [SerializeField] private VisualTreeAsset pauseMenu;
+
     private VisualElement pauseButtons;
     private Button bContinue;
     private Button bExtitMenu;
+
     //GameOverUI
-//    [SerializeField] private VisualTreeAsset gameOverMenu;
     private VisualElement gameOverButtons;
     private Button bRetry;
     private Button bExit;
+    [SerializeField] private GameManager gm;
 
     [Header("Mute Button")]
     [SerializeField] private Sprite muteSprite;
@@ -55,8 +56,8 @@ public class GameMenuControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
             Pause();
-        //controlar por variable de muerte del jugador
-        if (Input.GetKeyDown(KeyCode.K))
+        
+        if (gm.GetPlayerDeath())
             GameOver();
     }
     private void SetCallbacks()
