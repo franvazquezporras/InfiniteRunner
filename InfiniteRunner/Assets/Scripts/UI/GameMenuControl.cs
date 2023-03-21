@@ -9,6 +9,7 @@ public class GameMenuControl : MonoBehaviour
     private UIDocument mainMenuDocument;
     //GameUI
     private Label score;
+    private Label HighScore;
     private Button soundMute;
     private Button musicMute;
     //PauseUI
@@ -39,6 +40,7 @@ public class GameMenuControl : MonoBehaviour
         muteSound = PlayerPrefs.GetInt("muteSound") == 1;
         
         score = mainMenuDocument.rootVisualElement.Q<Label>("ScoreText");
+        HighScore = mainMenuDocument.rootVisualElement.Q<Label>("HighScoreText");
         musicMute = mainMenuDocument.rootVisualElement.Q<Button>("BMuteMusic");
         soundMute = mainMenuDocument.rootVisualElement.Q<Button>("BMuteSound");
 
@@ -52,6 +54,11 @@ public class GameMenuControl : MonoBehaviour
 
         SetCallbacks();
     }
+
+    private void Start()
+    {
+        HighScore.text = "HighScore: " + Mathf.Round(gm.GetHighScore());
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -59,6 +66,15 @@ public class GameMenuControl : MonoBehaviour
         
         if (gm.GetPlayerDeath())
             GameOver();
+
+        CheckScore();
+        
+    }
+
+    private void CheckScore()
+    {
+        score.text = "Score: " + Mathf.Round(gm.GetScore());
+        HighScore.text = "HighScore: " + Mathf.Round(gm.GetHighScore());        
     }
     private void SetCallbacks()
     {

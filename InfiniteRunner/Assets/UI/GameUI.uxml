@@ -3,8 +3,9 @@
     <ui:Template name="GameOverPanel" src="project://database/Assets/UI/GameOverPanel.uxml?fileID=9197481963319205126&amp;guid=a6b702d1431641c458ea933e1823f241&amp;type=3#GameOverPanel" />
     <Style src="project://database/Assets/UI/GeneralStyle.uss?fileID=7433441132597879392&amp;guid=bfaabd65db00f5446ae8da4f3986fb68&amp;type=3#GeneralStyle" />
     <ui:VisualElement name="PlayerUI" style="flex-grow: 1; flex-direction: row; position: absolute;">
-        <ui:VisualElement name="RightMenu" class="right-menu" style="justify-content: center;">
-            <ui:Label text="Score:" display-tooltip-when-elided="true" name="ScoreText" class="menu-button" />
+        <ui:VisualElement name="LeftMenu" class="right-menu" style="justify-content: flex-start; flex-direction: column;">
+            <ui:Label text="Score:" display-tooltip-when-elided="true" name="ScoreText" class="menu-button" style="font-size: 20px;" />
+            <ui:Label text="HighScore:" display-tooltip-when-elided="true" name="HighScoreText" class="menu-button" style="font-size: 20px;" />
         </ui:VisualElement>
         <ui:VisualElement name="RightMenu" class="right-menu">
             <ui:Button display-tooltip-when-elided="true" name="BMuteSound" class="menu-button" style="background-image: url(&apos;project://database/Assets/Textures/UI/GUI.png?fileID=21300086&amp;guid=1eaee135ce037439d925cee5e41ce026&amp;type=3#GUI_48&apos;); width: 30px; height: 30px;" />
