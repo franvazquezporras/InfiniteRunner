@@ -5,14 +5,16 @@ using UnityEngine;
 public class Coin : Collectable
 {
     int score;
-
+    private GameManager gm;
     private void Awake()
     {
         score = Random.Range(1, 5);
+        gm = FindObjectOfType<GameManager>();
     }
 
     private void OnDestroy()
     {
         //Sumar puntos a jugador (controlar multiplicadores activos)
+        gm.SetScore(score);
     }
 }
