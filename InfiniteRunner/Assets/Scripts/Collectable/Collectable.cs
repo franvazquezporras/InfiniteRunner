@@ -8,6 +8,6 @@ public class Collectable : MonoBehaviour
     {
         if (collision.gameObject.layer == Layers.PLAYER)
             gameObject.SetActive(false);
-            Destroy(gameObject,1);
+            //Destroy(gameObject,1);
     }
 }

@@ -12,9 +12,14 @@ public class Coin : Collectable
         gm = FindObjectOfType<GameManager>();
     }
 
-    private void OnDestroy()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Sumar puntos a jugador (controlar multiplicadores activos)
-        gm.SetScore(score);
+        if (collision.gameObject.layer == Layers.PLAYER)
+        {
+            gameObject.SetActive(false);
+            gm.SetScore(score);
+            //Sumar puntos a jugador (controlar multiplicadores activos)
+        }
+
     }
 }

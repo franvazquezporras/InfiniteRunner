@@ -54,7 +54,7 @@ public class PlayerControl : MonoBehaviour
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
         }
 
-        if(Input.GetKey (KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if(Input.GetKey (KeyCode.Space) || Input.GetMouseButton(0))
         {
             if(jumpTimeCounter > 0)
             {

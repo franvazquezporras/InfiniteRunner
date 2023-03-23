@@ -19,6 +19,9 @@ public class PlataformGenerator : MonoBehaviour
     [SerializeField] private float maxHeightChange;
     private float heightChange;
 
+    private CoinGenerator coinGenerator;
+    [SerializeField] private float randomCoin;
+
     void Start()
     {     
         platformsWidth = new float[poolPlatforms.Length];
@@ -27,6 +30,7 @@ public class PlataformGenerator : MonoBehaviour
 
         minHeight = transform.position.y;
         maxHeight = maxHeightPoint.position.y;
+        coinGenerator = FindObjectOfType<CoinGenerator>();
     }
 
     
@@ -50,6 +54,10 @@ public class PlataformGenerator : MonoBehaviour
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
+
+            if(Random.Range(0f,100f)< randomCoin)
+                coinGenerator.SpawnCoins(new Vector3(transform.position.x,transform.position.y+3f,transform.position.z));
+
             transform.position = new Vector3(transform.position.x + (platformsWidth[platformSelectetor] / 2), transform.position.y, transform.position.z);
         }
     }
