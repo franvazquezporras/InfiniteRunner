@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float jumpForce;    
     [SerializeField] private float jumpTime;
     private float jumpTimeCounter;
+    private bool stoppedJump;
+    private bool doubleJump;
 
     private Rigidbody2D rb2d;
     //private Collider2D col2d;
@@ -23,8 +25,13 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform groundcheck;
     [SerializeField] private float groundCheckRadius;
 
-    [Header("References")]
-    [SerializeField] GameManager gm;
+    [Header("Sounds & GameManager")]
+    [SerializeField] private GameManager gm;
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource doubleJumpSound;
+    [SerializeField] private AudioSource deathSound;
+
+
 
     private void Awake()
     {
@@ -34,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 
         jumpTimeCounter = jumpTime;
         speedMilestoneCount = speedIncreaseMilestone;
-
+        stoppedJump = true;
     }
     void Update()
     {
@@ -50,11 +57,23 @@ public class PlayerControl : MonoBehaviour
         rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            if(isGrounded)
+            if (isGrounded)
+            {
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+                stoppedJump = false;
+                jumpSound.Play();
+            }
+            if(!isGrounded && doubleJump)
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+                jumpTimeCounter = jumpTime;
+                stoppedJump = false;
+                doubleJump = false;
+                doubleJumpSound.Play();
+            }
         }
 
-        if(Input.GetKey (KeyCode.Space) || Input.GetMouseButton(0))
+        if((Input.GetKey (KeyCode.Space) || Input.GetMouseButton(0)) && !stoppedJump)
         {
             if(jumpTimeCounter > 0)
             {
@@ -66,11 +85,13 @@ public class PlayerControl : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
         {
             jumpTimeCounter = 0;
+            stoppedJump = true;
         }
 
         if (isGrounded)
         {
             jumpTimeCounter = jumpTime;
+            doubleJump = true;
         }
         anim.SetBool("Grounded", isGrounded);
     }
@@ -78,7 +99,11 @@ public class PlayerControl : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == Layers.DEATHZONE)
+        {
             gm.RestartGame();
+            deathSound.Play();
+        }
+            
            
     }
 }

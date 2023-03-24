@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Transform platformGenerator;    
     [SerializeField] private PlayerControl player;
-    
 
+    [SerializeField] AudioSource backgroundMusic;
+    [SerializeField] AudioSource backgroundDeathMusic;
 
     public float GetScore() { return score; }
     public float GetHighScore() { return highScore; }
@@ -38,5 +39,7 @@ public class GameManager : MonoBehaviour
         playerDeath = true;
         player.gameObject.SetActive(false);
         PlayerPrefs.SetFloat("HighScore", highScore);
+        backgroundMusic.Stop();
+        backgroundDeathMusic.Play();
     }
 }
