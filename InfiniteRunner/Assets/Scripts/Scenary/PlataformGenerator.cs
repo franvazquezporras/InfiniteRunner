@@ -9,7 +9,7 @@ public class PlataformGenerator : MonoBehaviour
     [SerializeField] private float distance;
     private float minDistance = 1;
     private float maxDistance = 5;
-    private int platformSelectetor;
+    private int platformSelected;
     private float[] platformsWidth;
     [SerializeField] private ItemPool[] poolPlatforms;
     
@@ -21,6 +21,9 @@ public class PlataformGenerator : MonoBehaviour
 
     private CoinGenerator coinGenerator;
     [SerializeField] private float randomCoin;
+
+    [SerializeField] private float randomSpike;
+    [SerializeField] ItemPool SpikePool;
 
     void Start()
     {     
@@ -39,17 +42,17 @@ public class PlataformGenerator : MonoBehaviour
         if (transform.position.x < generationPoint.position.x)
         {
             distance = Random.Range(minDistance, maxDistance);
-            platformSelectetor = Random.Range(0, poolPlatforms.Length);
+            platformSelected = Random.Range(0, poolPlatforms.Length);
             heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
             if(heightChange > maxHeight)            
                 heightChange = maxHeight;
             else if(heightChange < minHeight)
                 heightChange = minHeight;
 
-            transform.position = new Vector3(transform.position.x + (platformsWidth[platformSelectetor]/2) + distance, heightChange, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (platformsWidth[platformSelected]/2) + distance, heightChange, transform.position.z);
             
-            Instantiate(poolPlatforms[platformSelectetor], transform.position, transform.rotation);
-            GameObject newPlatform = poolPlatforms[platformSelectetor].GetPoolItem();
+            Instantiate(poolPlatforms[platformSelected], transform.position, transform.rotation);
+            GameObject newPlatform = poolPlatforms[platformSelected].GetPoolItem();
 
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
@@ -58,7 +61,18 @@ public class PlataformGenerator : MonoBehaviour
             if(Random.Range(0f,100f)< randomCoin)
                 coinGenerator.SpawnCoins(new Vector3(transform.position.x,transform.position.y+3f,transform.position.z));
 
-            transform.position = new Vector3(transform.position.x + (platformsWidth[platformSelectetor] / 2), transform.position.y, transform.position.z);
+            if (Random.Range(0f, 100f) < randomSpike)
+            {
+                GameObject spike = SpikePool.GetPoolItem();
+                
+                Vector3 spikePos = new Vector3(Random.Range(-platformsWidth[platformSelected]/2+1f, platformsWidth[platformSelected] / 2-1f), 2f, 0f);
+                spike.transform.position = transform.position+spikePos;
+                spike.transform.rotation = transform.rotation;
+                spike.SetActive(true);
+            }
+                
+
+                transform.position = new Vector3(transform.position.x + (platformsWidth[platformSelected] / 2), transform.position.y, transform.position.z);
         }
     }
 }
