@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 4978603175607374458}
   - component: {fileID: 6774475214128762626}
   - component: {fileID: 3952899544673544512}
+  - component: {fileID: 4498466124296577071}
+  - component: {fileID: 8557029814482568527}
+  - component: {fileID: 5312383726575979009}
   m_Layer: 0
-  m_Name: DoubleJumpPowerUp
+  m_Name: ShieldPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +108,59 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!61 &4498466124296577071
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277713861433264513}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.67}
+    newSize: {x: 1, y: 1.67}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.67}
+  m_EdgeRadius: 0
+--- !u!114 &8557029814482568527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277713861433264513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b428fcf1da19a4f84e0c707af68eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5312383726575979009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277713861433264513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5418bdf01f0e0d4fa508b40958dc50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doublePoints: 0
+  shield: 1
+  powerUpDuration: 10
 --- !u!1 &1542150021368579132
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4498618678509427405}
   m_Layer: 0
-  m_Name: DoubleJumpPowerUpParent
+  m_Name: ShieldPowerUpParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

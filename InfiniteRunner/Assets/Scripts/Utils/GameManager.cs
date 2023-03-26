@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
     public float GetScore() { return score; }
     public float GetHighScore() { return highScore; }
     public bool GetPlayerDeath() { return playerDeath; }
-    public void SetScore(float _score) { score += _score; }
+    public float GetPointForSecond() { return pointForSecond; }
+    public void SetScore(float _score) { score += _score*pointForSecond; }
     public void SetHighScore(float _highScore) { score += _highScore; }
     public void SetPlayerDeath(bool _playerDeath) { playerDeath = _playerDeath; }
+    public void SetPointForSecond(float _pointforSecond) { pointForSecond = _pointforSecond; }
 
     private void Awake()
     {

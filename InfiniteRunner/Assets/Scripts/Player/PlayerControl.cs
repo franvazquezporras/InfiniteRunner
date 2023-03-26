@@ -98,7 +98,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == Layers.DEATHZONE)
+        if (collision.gameObject.layer == Layers.DEATHZONE || collision.gameObject.layer == Layers.TRAP)
         {
             gm.RestartGame();
             deathSound.Play();

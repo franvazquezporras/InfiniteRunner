@@ -25,6 +25,12 @@ public class PlataformGenerator : MonoBehaviour
     [SerializeField] private float randomSpike;
     [SerializeField] ItemPool SpikePool;
 
+    [SerializeField] private float powerUpHeight;
+    [SerializeField] private ItemPool [] powerUpPool;
+    [SerializeField] private float randomPowerUp;
+
+    public float GetRandomSpike() { return randomSpike; }
+    public void SetRandomSpike(float _randomSpike) { randomSpike = _randomSpike; }
     void Start()
     {     
         platformsWidth = new float[poolPlatforms.Length];
@@ -48,6 +54,13 @@ public class PlataformGenerator : MonoBehaviour
                 heightChange = maxHeight;
             else if(heightChange < minHeight)
                 heightChange = minHeight;
+
+            if(Random.Range(0f,100)< randomPowerUp)
+            {
+                GameObject newPowerUp = powerUpPool[Random.Range(0,powerUpPool.Length)].GetPoolItem();
+                newPowerUp.transform.position = transform.position + new Vector3(distance / 2f, powerUpHeight, 0f);
+                newPowerUp.SetActive(true);
+            }
 
             transform.position = new Vector3(transform.position.x + (platformsWidth[platformSelected]/2) + distance, heightChange, transform.position.z);
             
