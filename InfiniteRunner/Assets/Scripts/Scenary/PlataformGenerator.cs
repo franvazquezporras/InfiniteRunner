@@ -7,8 +7,8 @@ public class PlataformGenerator : MonoBehaviour
     
     [SerializeField] private Transform generationPoint;
     [SerializeField] private float distance;
-    private float minDistance = 1;
-    private float maxDistance = 5;
+    private float minDistance = 4;
+    private float maxDistance = 10;
     private int platformSelected;
     private float[] platformsWidth;
     [SerializeField] private ItemPool[] poolPlatforms;
@@ -30,7 +30,13 @@ public class PlataformGenerator : MonoBehaviour
     [SerializeField] private float randomPowerUp;
 
     public float GetRandomSpike() { return randomSpike; }
+    public float GetMinDistance() { return minDistance; }
+    public float GetMaxDistance() { return maxDistance; }
+    public float GetMaxHeightChange() { return maxHeightChange; }
     public void SetRandomSpike(float _randomSpike) { randomSpike = _randomSpike; }
+    public void SetMinDistance(float _minDistance) { minDistance = _minDistance; }
+    public void SetMaxDistance(float _maxDistance) { maxDistance = _maxDistance; }
+    public void SetMaxHeightChange(float _maxHeightChange) { maxHeightChange = _maxHeightChange;  }
     void Start()
     {     
         platformsWidth = new float[poolPlatforms.Length];

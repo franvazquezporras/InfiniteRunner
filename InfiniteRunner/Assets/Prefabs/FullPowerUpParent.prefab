@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8231928848179229397}
   m_Layer: 0
-  m_Name: SpeedPowerUpParent
+  m_Name: FullPowerUpParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,9 @@ GameObject:
   - component: {fileID: 8829420624325591384}
   - component: {fileID: 3744869708993055693}
   - component: {fileID: 4226879801525096225}
+  - component: {fileID: 6297638109351891685}
   m_Layer: 0
-  m_Name: SpeedPowerUp
+  m_Name: FullPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,3 +178,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b428fcf1da19a4f84e0c707af68eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6297638109351891685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6766864643771867545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5418bdf01f0e0d4fa508b40958dc50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doublePoints: 1
+  shield: 0
+  easyMode: 1
+  powerUpDuration: 5

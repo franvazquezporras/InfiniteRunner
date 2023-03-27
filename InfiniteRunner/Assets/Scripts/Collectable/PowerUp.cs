@@ -6,6 +6,7 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] private bool doublePoints;
     [SerializeField] private bool shield;
+    [SerializeField] private bool easyMode;
     [SerializeField] private float powerUpDuration;
     private PowerUpManager powerUpManager;
 
@@ -17,7 +18,7 @@ public class PowerUp : MonoBehaviour
     {
         if(collision.gameObject.layer == Layers.PLAYER)
         {
-            powerUpManager.ActivatePowerUp(doublePoints, shield, powerUpDuration);
+            powerUpManager.ActivatePowerUp(doublePoints, shield, easyMode, powerUpDuration);
         }
         gameObject.SetActive(false);
     }
