@@ -21,11 +21,12 @@ public class PowerUpManager : MonoBehaviour
 
     private PlataformDestroyer[] spikeList;
 
-
+    private AudioSource powerUpSound;
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
         plataformGenerator = FindObjectOfType<PlataformGenerator>();
+        powerUpSound = GameObject.Find("EndPowerUpSound").GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -33,14 +34,15 @@ public class PowerUpManager : MonoBehaviour
         {
             powerUpDuration -= Time.deltaTime;
 
-            if (doublePoints)
-                gm.SetPointForSecond(normalPointPerSecond * 2);
+            if (doublePoints)            
+                gm.SetPointForSecond(normalPointPerSecond * 2);              
+            
             if (shield)
             {                
                 spikeList = FindObjectsOfType<PlataformDestroyer>();
                 for (int i = 0; i < spikeList.Length; i++)                
                     if(spikeList[i].gameObject.layer == Layers.TRAP)
-                        spikeList[i].gameObject.SetActive(false);                
+                        spikeList[i].gameObject.SetActive(false);              
             }
             if (easyMode)
             {                
@@ -48,15 +50,18 @@ public class PowerUpManager : MonoBehaviour
                 plataformGenerator.SetMaxDistance(1.5f);
                 plataformGenerator.SetRandomSpike(0);
                 plataformGenerator.SetMaxHeightChange(0);
+                
             }
             if (powerUpDuration <= 0)
             {
+                
                 gm.SetPointForSecond(normalPointPerSecond);
                 plataformGenerator.SetRandomSpike(spikeRate);
                 plataformGenerator.SetMinDistance(normalMinDistance);
                 plataformGenerator.SetMaxDistance(normalMaxDistance);
                 plataformGenerator.SetMaxHeightChange(normalMaxHeightChange);
-                powerUpActive = false;
+                powerUpActive = false;                
+                powerUpSound.Play();
             }
                 
         }
@@ -67,7 +72,7 @@ public class PowerUpManager : MonoBehaviour
         shield = _shield;
         powerUpDuration = _powerUpDuration;
         easyMode = _easyMode;
-
+        gm.SetScore(100);
         normalPointPerSecond = gm.GetPointForSecond();
         spikeRate = plataformGenerator.GetRandomSpike();
         normalMinDistance = plataformGenerator.GetMinDistance();

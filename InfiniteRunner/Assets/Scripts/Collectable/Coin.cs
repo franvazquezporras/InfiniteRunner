@@ -22,8 +22,7 @@ public class Coin : Collectable
             gm.SetScore(score);
             if (coinSound.isPlaying)
                 coinSound.Stop();
-            coinSound.Play();
-            //Sumar puntos a jugador (controlar multiplicadores activos)
+            coinSound.Play();            
         }
 
     }

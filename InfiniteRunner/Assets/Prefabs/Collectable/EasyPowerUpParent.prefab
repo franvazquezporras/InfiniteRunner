@@ -162,6 +162,7 @@ MonoBehaviour:
   shield: 0
   easyMode: 1
   powerUpDuration: 15
+  score: 100
 --- !u!1 &2241274647338933657
 GameObject:
   m_ObjectHideFlags: 0
