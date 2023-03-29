@@ -22,7 +22,12 @@ public class BackgroundParallax : MonoBehaviour
 
     private void Update()
     {
-        difCamX = iniCamX - transform.position.x; 
+        UpdateBackground();
+    }
+
+    private void UpdateBackground()
+    {
+        difCamX = iniCamX - transform.position.x;
         bg1R.material.mainTextureOffset = new Vector2(difCamX * (scrollSpeed * 0.4f) * -1, 0.0f);
         bg2R.material.mainTextureOffset = new Vector2(difCamX * (scrollSpeed * 0.25f) * -1, 0.0f);
         bg3R.material.mainTextureOffset = new Vector2(difCamX * (scrollSpeed * 0.1f) * -1, 0.0f);

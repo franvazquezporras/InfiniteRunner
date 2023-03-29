@@ -32,6 +32,11 @@ public class GameMenuControl : MonoBehaviour
     private bool muteSound;
     [SerializeField] private AudioMixer audioMixer;
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Awake                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene las referencias de los componentes de la UI del menu de la escena juego                                   */
+    /*********************************************************************************************************************************/
     private void Awake()
     {
         mainMenuDocument = GetComponent<UIDocument>();
@@ -55,10 +60,25 @@ public class GameMenuControl : MonoBehaviour
         SetCallbacks();
     }
 
+
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Start                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Hace una carga del ultimo record conseguido en el texto que le corresponde                                        */
+    /*********************************************************************************************************************************/
     private void Start()
     {
         HighScore.text = "HighScore: " + Mathf.Round(gm.GetHighScore());
     }
+
+
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Update                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Controla cuando se ha pausado o terminado y el juego, y actualiza los puntos                                      */
+    /*********************************************************************************************************************************/
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -71,11 +91,24 @@ public class GameMenuControl : MonoBehaviour
         
     }
 
+
+
+    /*********************************************************************************************************************************/
+    /*Funcion: CheckScore                                                                                                            */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Actualiza los puntos en la UI                                                                                     */
+    /*********************************************************************************************************************************/
     private void CheckScore()
     {
         score.text = "Score: " + Mathf.Round(gm.GetScore());
         HighScore.text = "HighScore: " + Mathf.Round(gm.GetHighScore());        
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: SetCallbacks                                                                                                          */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Asigna los callbacks a los botones de la UI                                                                       */
+    /*********************************************************************************************************************************/
     private void SetCallbacks()
     {
         musicMute.clicked += MuteMusic;
@@ -86,6 +119,11 @@ public class GameMenuControl : MonoBehaviour
         bExit.clicked += Exit;
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: MuteMusic                                                                                                             */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Control de silenciado de musica                                                                                   */
+    /*********************************************************************************************************************************/
     private void MuteMusic()
     {
         muteMusic = !muteMusic;
@@ -95,6 +133,11 @@ public class GameMenuControl : MonoBehaviour
         audioMixer.SetFloat("musicVolume", muteMusic ? -80f : Mathf.Log10(PlayerPrefs.GetFloat("musicVolume")) * 20);
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: MuteSound                                                                                                             */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Control de silenciado de los sonidos                                                                              */
+    /*********************************************************************************************************************************/
     private void MuteSound()
     {        
         muteSound = !muteSound;
@@ -104,12 +147,24 @@ public class GameMenuControl : MonoBehaviour
         audioMixer.SetFloat("soundsVolume", muteSound ? -80f : Mathf.Log10(PlayerPrefs.GetFloat("soundsVolume")) * 20);
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: ContinueGame                                                                                                          */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Cierra el menu de pause y activa el tiempo de  juego                                                              */
+    /*********************************************************************************************************************************/
     private void ContinueGame()
     {
         Time.timeScale = 1;
         pauseButtons.style.display = DisplayStyle.None;
     }
 
+
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Pause                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Pausa el juego y muestra la UI de pause                                                                           */
+    /*********************************************************************************************************************************/
     private void Pause()
     {
         Time.timeScale = 0;
@@ -117,15 +172,31 @@ public class GameMenuControl : MonoBehaviour
     }
 
 
+    /*********************************************************************************************************************************/
+    /*Funcion: GameOver                                                                                                              */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Muestra la pantalla de game over                                                                                  */
+    /*********************************************************************************************************************************/
     private void GameOver()
     {
         gameOverButtons.style.display = DisplayStyle.Flex;
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Exit                                                                                                                  */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Navega al menu principal                                                                                          */
+    /*********************************************************************************************************************************/
     private void Exit()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Retry                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Reinicia la escena de juego                                                                                       */
+    /*********************************************************************************************************************************/
     private void Retry()
     {
         SceneManager.LoadScene("Game");

@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Audio;
 public class MenuController : MonoBehaviour
 {
-    
+    //Variables
     private UIDocument mainMenuDocument;
 
     private VisualElement buttonsPanel;
@@ -38,6 +38,11 @@ public class MenuController : MonoBehaviour
 
     private List<string> qualityList = new List<string>(){"Low","Medium","High"};
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Awake                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene las referencias de los componentes de la UI del menu principal                                            */
+    /*********************************************************************************************************************************/
     private void Awake()
     {
         
@@ -64,6 +69,11 @@ public class MenuController : MonoBehaviour
         SetCallBacks();
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: SetCallBacks                                                                                                          */
+    /*Desarrollador: Vazquez                                                                                                         */   
+    /*Descripción: Asigna los callbacks de los botones, desplegables y slider de la UI                                               */
+    /*********************************************************************************************************************************/
     private void SetCallBacks()
     {
         bPlay.clicked += PlayButtonOnClicked;
@@ -82,6 +92,12 @@ public class MenuController : MonoBehaviour
         bBack.clicked += BackButtonOnClicked;
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: SetFullScreen                                                                                                         */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: Booleana que activa o desactiva el fullscreen                                                           */
+    /*Descripción: Activa o desactiva la pantalla completa del juego                                                                 */
+    /*********************************************************************************************************************************/
     private void SetFullScreen(bool check)
     {
         Screen.fullScreen = check;
@@ -119,7 +135,13 @@ public class MenuController : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);       
     }
-    
+
+    /*********************************************************************************************************************************/
+    /*Funcion: SelectQuality                                                                                                         */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: newQuality (calidad seleccionada)                                                                       */
+    /*Descripción: Modifica la calidad de texturas del juego                                                                         */
+    /*********************************************************************************************************************************/
     private void SelectQuality(string newQuality)
     {
         int quality = 0;
@@ -130,24 +152,45 @@ public class MenuController : MonoBehaviour
         else if (newQuality == "High")
             quality = 2;
         QualitySettings.SetQualityLevel(quality);
-    }   
-  
+    }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: PlayButtonOnClicked                                                                                                   */
+    /*Desarrollador: Vazquez                                                                                                         */    
+    /*Descripción: LLama a la escena del juego                                                                                       */
+    /*********************************************************************************************************************************/
     private void PlayButtonOnClicked()
     {
         SceneManager.LoadScene("Game");
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: SettingsButtonOnClicked                                                                                               */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: LLama al panel de opciones                                                                                        */
+    /*********************************************************************************************************************************/
     private void SettingsButtonOnClicked()
     {
         buttonsPanel.Clear();
         buttonsPanel.Add(settingsButtons);
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: ExitButtonOnClicked                                                                                                   */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Cierra el juego por completo                                                                                      */
+    /*********************************************************************************************************************************/
     private void ExitButtonOnClicked()
     {
         Application.Quit();
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: SetMusicVolume                                                                                                        */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: ev (volumen asignado)                                                                                   */
+    /*Descripción: Control el Volumen de la musica del juego                                                                         */
+    /*********************************************************************************************************************************/
     private void SetMusicVolume(float ev)
     {
         audioMixer.SetFloat("musicVolume", Mathf.Log10(ev) * 20);
@@ -167,6 +210,12 @@ public class MenuController : MonoBehaviour
         PlayerPrefs.SetFloat("musicVolume", sliderMusic.value);
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: MuteMusicButtonOnClicked                                                                                              */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: slide (controla si se ha muteado desde el slider o desde el boton mute)                                 */
+    /*Descripción: Control silenciar la musica del juego                                                                             */
+    /*********************************************************************************************************************************/
     private void MuteMusicButtonOnClicked(bool slide)
     {        
         if (!slide)                  
@@ -177,6 +226,12 @@ public class MenuController : MonoBehaviour
         audioMixer.SetFloat("musicVolume", muteMusic ? -80f : Mathf.Log10(PlayerPrefs.GetFloat("musicVolume"))*20);        
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: SetSoundVolume                                                                                                        */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: ev (volumen asignado)                                                                                   */
+    /*Descripción: Control el Volumen de los sonidos del juego                                                                       */
+    /*********************************************************************************************************************************/
     private void SetSoundVolume(float ev)
     {
         audioMixer.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);
@@ -194,7 +249,12 @@ public class MenuController : MonoBehaviour
         }
         PlayerPrefs.SetFloat("soundsVolume", Mathf.Log10(ev) * 20);        
     }
-
+    /*********************************************************************************************************************************/
+    /*Funcion: MuteSoundButtonOnClicked                                                                                              */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: slide (controla si se ha muteado desde el slider o desde el boton mute)                                 */
+    /*Descripción: Control silenciar los sonidos del juego                                                                           */
+    /*********************************************************************************************************************************/
     private void MuteSoundButtonOnClicked(bool slide)
     {
         if (!slide)        
@@ -205,6 +265,11 @@ public class MenuController : MonoBehaviour
         audioMixer.SetFloat("soundsVolume", muteSound ? -80f : Mathf.Log10(PlayerPrefs.GetFloat("soundsVolume")) * 20);
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: BackButtonOnClicked                                                                                                   */
+    /*Desarrollador: Vazquez                                                                                                         */    
+    /*Descripción: Carga los botones del menu principal                                                                              */
+    /*********************************************************************************************************************************/
     private void BackButtonOnClicked()
     {
         buttonsPanel.Clear();

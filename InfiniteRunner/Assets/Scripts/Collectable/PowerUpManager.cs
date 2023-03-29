@@ -8,6 +8,7 @@ public class PowerUpManager : MonoBehaviour
     private bool shield;
     private bool easyMode;
     private bool powerUpActive;
+    private bool firstLoad = true;
     private float powerUpDuration;
     private GameManager gm;
     private PlataformGenerator plataformGenerator;
@@ -46,8 +47,8 @@ public class PowerUpManager : MonoBehaviour
             }
             if (easyMode)
             {                
-                plataformGenerator.SetMinDistance(1f);
-                plataformGenerator.SetMaxDistance(1.5f);
+                plataformGenerator.SetMinDistance(1.5f);
+                plataformGenerator.SetMaxDistance(2f);
                 plataformGenerator.SetRandomSpike(0);
                 plataformGenerator.SetMaxHeightChange(0);
                 
@@ -63,21 +64,24 @@ public class PowerUpManager : MonoBehaviour
                 powerUpActive = false;                
                 powerUpSound.Play();
             }
-                
         }
     }
-    public void ActivatePowerUp(bool _doublePoints,bool _shield,bool _easyMode,float _powerUpDuration)
+    public void ActivatePowerUp(bool _doublePoints, bool _shield, bool _easyMode, float _powerUpDuration)
     {
         doublePoints = _doublePoints;
         shield = _shield;
         powerUpDuration = _powerUpDuration;
         easyMode = _easyMode;
         gm.SetScore(100);
-        normalPointPerSecond = gm.GetPointForSecond();
-        spikeRate = plataformGenerator.GetRandomSpike();
-        normalMinDistance = plataformGenerator.GetMinDistance();
-        normalMaxDistance = plataformGenerator.GetMaxDistance();
-        normalMaxHeightChange = plataformGenerator.GetMaxHeightChange();
+        if (firstLoad)
+        {        
+            normalPointPerSecond = gm.GetPointForSecond();
+            spikeRate = plataformGenerator.GetRandomSpike();
+            normalMinDistance = plataformGenerator.GetMinDistance();
+            normalMaxDistance = plataformGenerator.GetMaxDistance();
+            normalMaxHeightChange = plataformGenerator.GetMaxHeightChange();
+            firstLoad = false;
+        }
         powerUpActive = true;
         
     }
