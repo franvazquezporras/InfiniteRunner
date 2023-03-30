@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class BackgroundParallax : MonoBehaviour
 {    
+    //Variables
     [SerializeField] private GameObject background1, background2, background3, background4;
     [SerializeField] private float scrollSpeed;
 
     private Renderer bg1R, bg2R, bg3R, bg4R;
-    private float iniCamX, difCamX;        
-    
+    private float iniCamX, difCamX;
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Start                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene referencias de las distintas capas de background                                                          */
+    /*********************************************************************************************************************************/
     private void Start()
     {
         bg1R = background1.GetComponent<Renderer>();
@@ -20,11 +25,22 @@ public class BackgroundParallax : MonoBehaviour
         iniCamX = transform.position.x;
     }
 
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Update                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Actualiza la posicion de los backgrounds                                                                          */
+    /*********************************************************************************************************************************/
     private void Update()
     {
         UpdateBackground();
     }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: UpdateBackground                                                                                                      */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Actualiza la posicion de los backgrounds                                                                          */
+    /*********************************************************************************************************************************/
     private void UpdateBackground()
     {
         difCamX = iniCamX - transform.position.x;

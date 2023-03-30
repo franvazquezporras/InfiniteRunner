@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class CoinGenerator : MonoBehaviour
 {
+    //Variables
     [SerializeField] private ItemPool coinPool;
     [SerializeField] private float distance;
 
-
+    /*********************************************************************************************************************************/
+    /*Funcion: SpawnCoins                                                                                                            */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: posicion inicial de la moneda central                                                                   */                                   
+    /*Descripción: Genera 3 monedas en el centro de la plataforma                                                                    */
+    /*********************************************************************************************************************************/
     public void SpawnCoins(Vector3 startPosition)
     {
         GameObject coin1 = coinPool.GetPoolItem();

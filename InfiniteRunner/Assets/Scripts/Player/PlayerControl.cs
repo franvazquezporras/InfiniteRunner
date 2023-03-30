@@ -16,7 +16,6 @@ public class PlayerControl : MonoBehaviour
     private bool doubleJump;
 
     private Rigidbody2D rb2d;
-    //private Collider2D col2d;
     private Animator anim;
 
     [Header ("Player checks collider")]
@@ -32,17 +31,27 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private AudioSource deathSound;
 
 
-
+    /*********************************************************************************************************************************/
+    /*Funcion: Awake                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene referencias y los valores de variables predeterminados                                                    */
+    /*********************************************************************************************************************************/
     private void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        //col2d = GetComponent<Collider2D>();
+        rb2d = GetComponent<Rigidbody2D>();        
         anim = GetComponent<Animator>();
 
         jumpTimeCounter = jumpTime;
         speedMilestoneCount = speedIncreaseMilestone;
         stoppedJump = true;
     }
+
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Update                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Controla el movimiento del jugador (el salto y movimiento lateral)                                                */
+    /*********************************************************************************************************************************/
     void Update()
     {
         
@@ -96,6 +105,13 @@ public class PlayerControl : MonoBehaviour
         anim.SetBool("Grounded", isGrounded);
     }
 
+
+    /*********************************************************************************************************************************/
+    /*Funcion: OnCollisionEnter2D                                                                                                    */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Parametros de entrada: colision de objetos con el jugador                                                                      */
+    /*Descripción: Controla cuando el jugador colisiona con trampas de pinchos o cae al vacio                                        */
+    /*********************************************************************************************************************************/
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == Layers.DEATHZONE || collision.gameObject.layer == Layers.TRAP)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //Variables
     private float score = 0;
     private float highScore;
     private bool playerDeath;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource backgroundMusic;
     [SerializeField] AudioSource backgroundDeathMusic;
 
+    //Getters & Setters
     public float GetScore() { return score; }
     public float GetHighScore() { return highScore; }
     public bool GetPlayerDeath() { return playerDeath; }
@@ -24,10 +26,21 @@ public class GameManager : MonoBehaviour
     public void SetPlayerDeath(bool _playerDeath) { playerDeath = _playerDeath; }
     public void SetPointForSecond(float _pointforSecond) { pointForSecond = _pointforSecond; }
 
+    /*********************************************************************************************************************************/
+    /*Funcion: Awake                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene el ultimo highscore guardado en playerpref                                                                */
+    /*********************************************************************************************************************************/
     private void Awake()
     {
         highScore = PlayerPrefs.GetFloat("HighScore",0);
     }
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Update                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Actualiza los puntos en base al tiempo, en caso de superar el record este tambien se actualiza                    */
+    /*********************************************************************************************************************************/
     private void Update()
     {
         score += pointForSecond * Time.deltaTime;
@@ -36,6 +49,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    /*********************************************************************************************************************************/
+    /*Funcion: RestartGame                                                                                                           */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Activa el menu de game over y guarda el record, activa la musica de game over                                     */
+    /*********************************************************************************************************************************/
     public void RestartGame()
     {        
         playerDeath = true;

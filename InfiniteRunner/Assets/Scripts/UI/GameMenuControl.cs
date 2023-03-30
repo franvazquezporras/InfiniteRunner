@@ -6,7 +6,9 @@ using UnityEngine.UIElements;
 using UnityEngine.Audio;
 public class GameMenuControl : MonoBehaviour
 {
+    //Variables
     private UIDocument mainMenuDocument;
+
     //GameUI
     private Label score;
     private Label HighScore;

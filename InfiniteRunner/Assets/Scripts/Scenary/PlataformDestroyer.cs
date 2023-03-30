@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class PlataformDestroyer : MonoBehaviour
 {
+    //Variables
     private GameObject platformDestroyerPoint;
-    
-    // Start is called before the first frame update
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Start                                                                                                                 */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Obtiene la referencia del punto de destruccion de las plataformas                                                 */
+    /*********************************************************************************************************************************/
     void Start()
     {
         platformDestroyerPoint = GameObject.Find("PlatformDestoyer");
     }
 
-    // Update is called once per frame
+
+    /*********************************************************************************************************************************/
+    /*Funcion: Update                                                                                                                */
+    /*Desarrollador: Vazquez                                                                                                         */
+    /*Descripción: Comprueba cuando la posicion de la plataforma en x es menor que el punto de destruccion y desactiva la misma      */
+    /*********************************************************************************************************************************/
     void Update()
     {
         if(transform.position.x < platformDestroyerPoint.transform.position.x)
