@@ -35,3 +35,8 @@ I made a very basic infinite runner during my training with very different asset
 
 
 *Link:* https://zetaka.itch.io/infiniterunner
+
+
+![image](https://github.com/franvazquezporras/InfiniteRunner/assets/45006637/9be37c31-83c3-4735-b8a8-4093049ea0e3)
+
+![GifInfiniteRunner](https://github.com/franvazquezporras/InfiniteRunner/assets/45006637/c62a0b0f-a346-4509-ad83-b9b04d719224)
